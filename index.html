@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh-HK">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>IFUZI CS2 Server</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BOBOBOY CS2 Server</title>
   <style>
     body {
       font-family: "Segoe UI", sans-serif;
@@ -13,8 +13,12 @@
       padding: 2em;
     }
     h1 {
-      font-size: 2em;
-      margin-bottom: 0.5em;
+      font-size: 2.5em;
+      margin-bottom: 0.2em;
+    }
+    .status {
+      font-size: 1.2em;
+      margin-bottom: 1em;
     }
     .button {
       display: inline-block;
@@ -31,48 +35,87 @@
     .button:hover {
       background-color: #218838;
     }
-    .steps {
-      text-align: left;
-      max-width: 600px;
-      margin: 0 auto;
+    .card {
       background: #1f1f1f;
-      padding: 1.5em;
       border-radius: 12px;
+      padding: 1.5em;
+      max-width: 600px;
+      margin: 1.5em auto;
+      text-align: left;
     }
-    .steps li {
-      margin: 1em 0;
-      line-height: 1.6;
+    .card h2 {
+      border-bottom: 1px solid #444;
+      padding-bottom: 0.3em;
+      margin-bottom: 0.8em;
+    }
+    li {
+      margin: 0.5em 0;
     }
     footer {
       margin-top: 2em;
-      font-size: 0.8em;
+      font-size: 0.9em;
       color: #999;
     }
   </style>
 </head>
 <body>
-  <h1>🎮 IFUZI CS2 Server 入房教學</h1>
-
+  <h1>🔥 BOBOBOY CS2 SERVER 🔫</h1>
+  <div class="status" id="status">檢查緊伺服器狀態...</div>
   <a class="button" href="steam://connect/play.akinokazoku.com">
-    👉 一click直接入Server
+    👉 一Click入BOBOBOY Server
   </a>
 
-  <div class="steps">
-    <h2>💡 手動入房步驟：</h2>
+  <div class="card">
+    <h2>🗺 Map 輪替表（每日自High）：</h2>
+    <ul>
+      <li>星期一：de_mirage</li>
+      <li>星期二：de_inferno</li>
+      <li>星期三：aim_botz</li>
+      <li>星期四：de_overpass</li>
+      <li>星期五：surf_utopia</li>
+      <li>星期六：de_ancient</li>
+      <li>星期日：自選！host_workshop_map</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>👑 管理員陣容：</h2>
+    <ul>
+      <li>👑 BOBOBOY - 大佬</li>
+      <li>🧠 MING - Tech支援</li>
+      <li>💣 C4Boy - 打咗先算</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>📦 手動入房教學：</h2>
     <ol>
-      <li>打開 CS2</li>
-      <li>喺主選單撳 <strong>右上角設定⚙️</strong></li>
-      <li>入去 <strong>Game</strong> 分頁，開 <strong>Enable Developer Console (~)</strong></li>
-      <li>撳 `~`（ESC左邊嗰粒）開 console</li>
+      <li>開 CS2 → 撳右上角 ⚙️ → Game → 開 Developer Console</li>
+      <li>撳 `~` 開 console（ESC 左邊）</li>
       <li>打：
         <pre>connect play.akinokazoku.com</pre>
       </li>
-      <li>完成 ✅</li>
     </ol>
   </div>
 
-  <footer>
-    Server hosted by Akinokazoku | GSLT legit | Made for bros only
-  </footer>
+  <footer>© 2025 BOBOBOY CS2 Server | 玩得開心啲，打得盡興啲</footer>
+
+  <script>
+    async function checkStatus() {
+      try {
+        const response = await fetch("https://api.mcsrvstat.us/2/play.akinokazoku.com");
+        const data = await response.json();
+        const statusEl = document.getElementById("status");
+        if (data && data.online) {
+          statusEl.innerHTML = "🟢 Server Online！快啲入嚟開槍！";
+        } else {
+          statusEl.innerHTML = "🔴 Server Offline（可能係BOBO瞓覺中）";
+        }
+      } catch (e) {
+        document.getElementById("status").innerHTML = "⚠️ 無法檢查伺服器狀態";
+      }
+    }
+    checkStatus();
+  </script>
 </body>
 </html>
